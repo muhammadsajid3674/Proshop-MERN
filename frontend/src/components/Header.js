@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 
 
 function Header() {
+    const linkDefault = {
+        textDecoration: 'none',
+        color: 'inherit'
+    }
     return (
         <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
             <Container>
-                <Link style={{ textDecoration: 'none' }} to='/'>
-                    <Navbar.Brand>ProShop</Navbar.Brand>
-                </Link>
+                <Navbar.Brand>
+                    <Link style={linkDefault} to='/'>ProShop</Link>
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -16,12 +20,12 @@ function Header() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Link style={{ textDecoration: 'none' }} to='/cart'>
-                            <Nav.Link><i className="fa-solid fa-cart-shopping"></i> Cart</Nav.Link>
-                        </Link>
-                        <Link style={{ textDecoration: 'none' }} to='/login'>
-                            <Nav.Link><i className="fa-solid fa-user"></i> Signup</Nav.Link>
-                        </Link>
+                        <Nav.Link>
+                            <Link style={linkDefault} to='/cart'><i className="fa-solid fa-cart-shopping"></i> Cart</Link>
+                        </Nav.Link>
+                        <Nav.Link>
+                            <Link style={linkDefault} to='/login'><i className="fa-solid fa-user"></i> Signup</Link>
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
