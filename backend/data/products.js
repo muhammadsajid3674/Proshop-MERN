@@ -79,4 +79,4 @@ const sampleProducts = [
   },
 ]
 
-export default sampleProducts
+export default sampleProducts;
