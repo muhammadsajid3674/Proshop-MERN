@@ -1,17 +1,14 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function Header() {
-    const linkDefault = {
-        textDecoration: 'none',
-        color: 'inherit'
-    }
+    const navigate = useNavigate()
     return (
         <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
             <Container>
-                <Navbar.Brand>
-                    <Link style={linkDefault} to='/'>ProShop</Link>
+                <Navbar.Brand >
+                    <Nav.Link onClick={() => { navigate('/') }}>ProShop</Nav.Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -20,16 +17,12 @@ function Header() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link>
-                            <Link style={linkDefault} to='/cart'><i className="fa-solid fa-cart-shopping"></i> Cart</Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link style={linkDefault} to='/login'><i className="fa-solid fa-user"></i> Signup</Link>
-                        </Nav.Link>
+                        <Nav.Link onClick={() => { navigate('/cart') }}><i className="fa-solid fa-cart-shopping"></i> Cart</Nav.Link>
+                        <Nav.Link onClick={() => { navigate('/login') }}><i className="fa-solid fa-user"></i> Signup</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>
+        </Navbar >
     );
 }
 
