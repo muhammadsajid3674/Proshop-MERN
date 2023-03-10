@@ -1,11 +1,22 @@
-import React from 'react'
-import { Button, Col, Image, ListGroup, Row } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Button, Col, Form, Image, ListGroup, Row } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import Rating from './Rating'
 
 const ProductDetail = ({ product }) => {
+    const [qty, setQty] = useState(0)
+
+    const navigate = useNavigate();
+
     let productImage;
     if (product.image) {
         productImage = require(`../${product.image}`)
+    }
+
+    const qtyArray = [...Array(product.countInStock).keys()]
+
+    const addToCardHandler = () => {
+        navigate(`/cart/${product._id}?qty=${qty}`)
     }
 
     return (
@@ -39,10 +50,24 @@ const ProductDetail = ({ product }) => {
                             <Col>{product.countInStock > 0 ? 'In Stock' : 'Out of stock'}</Col>
                         </Row>
                     </ListGroup.Item>
+                    {product.countInStock > 0 && <>
+                        <ListGroup.Item>
+                            <Row>
+                                <Col>Quantity:</Col>
+                                <Col>
+                                    <Form.Select value={qty} onChange={(e) => setQty(e.target.value)}>
+                                        {qtyArray && qtyArray.map((e, i) =>
+                                            <option key={i} value={e + 1}>{e + 1}</option>
+                                        )}
+                                    </Form.Select>
+                                </Col>
+                            </Row>
+                        </ListGroup.Item>
+                    </>}
                     <ListGroup.Item>
                         <Row>
                             <Col className='text-center'>
-                                <Button type='submit' disabled={product.countInStock === 0}>Add To Card</Button>
+                                <Button type='submit' onClick={addToCardHandler} disabled={product.countInStock === 0}>Add To Card</Button>
                             </Col>
                         </Row>
                     </ListGroup.Item>

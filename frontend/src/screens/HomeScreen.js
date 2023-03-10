@@ -4,6 +4,7 @@ import Product from '../components/Product'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductList } from '../config/Redux/Action/productAction'
 import MessageAlert from '../components/MessageAlert'
+import Loader from '../components/Loader'
 
 const HomeScreen = () => {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const HomeScreen = () => {
             <h1 className='mt-3'>Latest Product</h1>
             {loading ? (
                 <div className='d-flex justify-content-center align-items-center' style={{height: '60vh'}}>
-                    <div className='mexican-wave'></div>
+                    <Loader/>
                 </div>
             ) : error ? (
                 <MessageAlert variant='danger' message={error} />

@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { fetchSingleProduct } from '../config/Redux/Action/productAction'
+import Loader from '../components/Loader'
 import MessageAlert from '../components/MessageAlert'
 import ProductDetail from '../components/ProductDetail'
-import { fetchSingleProduct } from '../config/Redux/Action/productAction'
 
 const ProductDetailScreen = () => {
     const params = useParams()
@@ -20,7 +21,7 @@ const ProductDetailScreen = () => {
         <>
             {loading ? (
                 <div className='d-flex justify-content-center align-items-center' style={{ height: '60vh' }}>
-                    <div className='mexican-wave'></div>
+                    <Loader />
                 </div>
             ) : error ? (
                 <MessageAlert variant='danger' message={error} />
