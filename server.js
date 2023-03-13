@@ -1,10 +1,10 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import connectDB from './backend/config/db.js'
+import connectDB from './config/db.js'
 import colors from 'colors';
-import productRouter from './backend/routes/productRoutes.js'
-import { errorHandler, notFound } from './backend/middleware/errorMiddleware.js';
+import productRouter from './routes/productRoutes.js'
+import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 const app = express();
