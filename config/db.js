@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const connectDB = async () => {
+const connectDB = async (DB_URL) => {
     try {
-        const conn = await mongoose.connect('mongodb+srv://admin:admin123@cluster0.s4xr5cb.mongodb.net/foodshop?retryWrites=true&w=majority', {
+        const conn = await mongoose.connect(DB_URL, {
             useUnifiedTopology: true,
             useNewUrlParser: true
         })

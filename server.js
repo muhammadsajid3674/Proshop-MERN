@@ -9,8 +9,8 @@ import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 dotenv.config();
 const app = express();
 app.use(cors());
-
-connectDB()
+const DB_URL = 'mongodb+srv://admin:admin123@cluster0.s4xr5cb.mongodb.net/foodshop?retryWrites=true&w=majority'
+connectDB(DB_URL)
 
 
 app.use('/api/product', productRouter)
