@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Rating from './Rating'
 
 const ProductDetail = ({ product }) => {
-    const [qty, setQty] = useState(0)
+    const [qty, setQty] = useState(1)
 
     const navigate = useNavigate();
 

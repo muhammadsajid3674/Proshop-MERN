@@ -3,7 +3,7 @@ import { Button, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import MessageAlert from '../components/MessageAlert';
-import { addToCart } from '../config/Redux/Action/cartAction';
+import { addToCart, removeFromCart } from '../config/Redux/Action/cartAction';
 
 const CartScreen = () => {
   const dispatch = useDispatch();
@@ -12,10 +12,6 @@ const CartScreen = () => {
   const { cartItems } = useSelector(state => state.cart)
 
   const qty = window.location.search ? window.location.search.split('=')[1] : 1;
-
-  console.log();
-
-  const removeItemHandler = (productId) => { }
 
   useEffect(() => {
     dispatch(addToCart(params.id, qty))
@@ -47,7 +43,7 @@ const CartScreen = () => {
                   </Form.Select>
                 </Col>
                 <Col md={2}>
-                  <Button type='button' variant='light' onClick={() => removeItemHandler(item.productId)}>
+                  <Button type='button' variant='light' onClick={() => { dispatch(removeFromCart(item.productId)) }}>
                     <i className='fas fa-trash'></i>
                   </Button>
                 </Col>

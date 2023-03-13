@@ -10,7 +10,8 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
-connectDB()
+const DB_URL = 'mongodb+srv://admin:admin123@cluster0.s4xr5cb.mongodb.net/proshop?retryWrites=true&w=majority';
+connectDB(DB_URL)
 
 
 app.use('/api/product', productRouter)
