@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bycrpt from "bcryptjs";
 
 const userSchema = mongoose.Schema({
     name: {
@@ -21,6 +22,19 @@ const userSchema = mongoose.Schema({
     },
 }, {
     timestamps: true
+})
+
+userSchema.methods.matchPassword = async function (enteredPass) {
+    return await bycrpt.compare(enteredPass, this.password)
+}
+
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        next()
+    }
+
+    const salt = await bycrpt.genSalt(10);
+    this.password = bycrpt.hash(this.password, salt)
 })
 
 const User = mongoose.model('User', userSchema);
