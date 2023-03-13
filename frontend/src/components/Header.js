@@ -8,7 +8,7 @@ function Header() {
         <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
             <Container>
                 <Navbar.Brand >
-                    <Nav.Link onClick={() => { navigate('/') }}>ProShop</Nav.Link>
+                    <Nav.Link onClick={() => { navigate('/') }}>FoodShop</Nav.Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">

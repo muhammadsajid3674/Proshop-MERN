@@ -4,14 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import Rating from './Rating'
 
 const ProductDetail = ({ product }) => {
-    const [qty, setQty] = useState(0)
+    const [qty, setQty] = useState(1)
 
     const navigate = useNavigate();
-
-    let productImage;
-    if (product.image) {
-        productImage = require(`../${product.image}`)
-    }
 
     const qtyArray = [...Array(product.countInStock).keys()]
 
@@ -20,9 +15,9 @@ const ProductDetail = ({ product }) => {
     }
 
     return (
-        <Row>
-            <Col md={6}>
-                <Image src={productImage} alt={product.name} fluid />
+        <Row className='justify-content-center align-items-center'>
+            <Col md={6} className='text-center'>
+                <Image src={product.image} alt={product.name} fluid />
             </Col>
             <Col md={3}>
                 <ListGroup variant="flush">

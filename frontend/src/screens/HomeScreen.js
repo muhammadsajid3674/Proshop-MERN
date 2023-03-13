@@ -18,8 +18,8 @@ const HomeScreen = () => {
         <>
             <h1 className='mt-3'>Latest Product</h1>
             {loading ? (
-                <div className='d-flex justify-content-center align-items-center' style={{height: '60vh'}}>
-                    <Loader/>
+                <div className='d-flex justify-content-center align-items-center' style={{ height: '60vh' }}>
+                    <Loader />
                 </div>
             ) : error ? (
                 <MessageAlert variant='danger' message={error} />

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import CartScreen from '../screens/CartScreen';
+import ConfimedOrder from '../screens/ConfimedOrder';
 import HomeScreen from '../screens/HomeScreen';
 import ProductDetailScreen from '../screens/ProductDetailScreen';
 
@@ -17,6 +18,7 @@ const AppRouter = () => {
                         <Route path='/' element={<HomeScreen />} />
                         <Route path='/product/:id' element={<ProductDetailScreen />} />
                         <Route path='/cart/:id?' element={<CartScreen />} />
+                        <Route path='/confirmedOrder' element={<ConfimedOrder />} />
                     </Routes>
                 </Container>
             </main>

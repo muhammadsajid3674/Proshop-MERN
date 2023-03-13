@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react'
 import { Button, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MessageAlert from '../components/MessageAlert';
-import { addToCart } from '../config/Redux/Action/cartAction';
+import { addToCart, removeFromCart } from '../config/Redux/Action/cartAction';
 
 const CartScreen = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate();
 
   const { cartItems } = useSelector(state => state.cart)
 
   const qty = window.location.search ? window.location.search.split('=')[1] : 1;
-
-  console.log();
-
-  const removeItemHandler = (productId) => { }
 
   useEffect(() => {
     dispatch(addToCart(params.id, qty))
@@ -28,14 +25,10 @@ const CartScreen = () => {
           <MessageAlert variant='danger' message='Data not found' />
         ) : (
           cartItems.length > 0 && cartItems.map((item, index) => {
-            let cartItemImage;
-            if (item.image) {
-              cartItemImage = require(`../${item.image}`)
-            }
             return <ListGroup key={index} style={{ backgroundColor: "#fff", marginBottom: '0.5rem' }}>
               <Row className='align-items-center'>
                 <Col md={2}>
-                  <Image src={cartItemImage} alt={item.name} fluid />
+                  <Image src={item.image} alt={item.name} fluid />
                 </Col>
                 <Col md={4}>{item.name}</Col>
                 <Col md={2}>$ {item.price}</Col>
@@ -47,7 +40,7 @@ const CartScreen = () => {
                   </Form.Select>
                 </Col>
                 <Col md={2}>
-                  <Button type='button' variant='light' onClick={() => removeItemHandler(item.productId)}>
+                  <Button type='button' variant='light' onClick={() => dispatch(removeFromCart(item.productId))}>
                     <i className='fas fa-trash'></i>
                   </Button>
                 </Col>
@@ -60,18 +53,18 @@ const CartScreen = () => {
         <ListGroup>
           <ListGroup.Item>
             <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
-            $ {cartItems.reduce((acc, item) => acc + item.price, 0)}
+            $ {cartItems.reduce((acc, item) => Math.round((acc + item.price) * item.qty), 0)}
           </ListGroup.Item>
           <ListGroup.Item>
             <Row>
               <Col className='text-center'>
-                <Button type='submit'>Proceed to checkout</Button>
+                <Button type='submit' onClick={() => { navigate('/confirmedOrder', { state: { cartItems } }) }}>Proceed to checkout</Button>
               </Col>
             </Row>
           </ListGroup.Item>
         </ListGroup>
       </Col>
-    </Row>
+    </Row >
   )
 }
 
